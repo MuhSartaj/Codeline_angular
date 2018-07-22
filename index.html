@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>
+
+<body ng-app="myApp">
+
+<p><a href="./">Home</a></p>
+<div class="search">
+    <form ng-controller="ResultController" ng-submit="Search()">
+        <input type="text" ng-model="keyword" required="">
+        <input type="submit">
+    </form>
+</div>
+<p><h3 id="TodayIs"></h3></p>
+<div ng-view></div>
+<script>
+var app = angular.module("myApp", ["ngRoute"]);
+app.config(function($routeProvider) {
+    $routeProvider
+    .when("/", {
+        templateUrl : "templates/home.html",
+        controller : "homeController"
+    })
+    .when("/weather/:woeid", {
+        templateUrl : "templates/weather_detail.html",
+        controller : "DetailController"
+    })
+    .when("/search/:keyword", {
+        templateUrl : "templates/search.html",
+        controller : "SearchController"
+    });
+});
+app.controller("homeController", function ($scope, $http) {
+    $http.get('Api/weather.php?command=location&woeid=2344116').then(function(response) {
+        //console.log(response.data.consolidated_weather);
+        $scope.IstanbulTemp = response.data.consolidated_weather[0];
+        $scope.Istanbul = response.data;
+    });
+    $http.get('Api/weather.php?command=location&woeid=638242').then(function(response) {
+        $scope.BerlinTemp = response.data.consolidated_weather[0];
+        $scope.Berlin = response.data;
+    });
+    $http.get('Api/weather.php?command=location&woeid=44418').then(function(response) {
+        $scope.LondonTemp = response.data.consolidated_weather[0];
+        $scope.London = response.data;
+    });
+    $http.get('Api/weather.php?command=location&woeid=565346').then(function(response) {
+        $scope.HelsinkiTemp = response.data.consolidated_weather[0];
+        $scope.Helsinki = response.data;
+    });
+    $http.get('Api/weather.php?command=location&woeid=560743').then(function(response) {
+        $scope.DublinTemp = response.data.consolidated_weather[0];
+        $scope.Dublin = response.data;
+    });
+    $http.get('Api/weather.php?command=location&woeid=9807').then(function(response) {
+        $scope.VancouverTemp = response.data.consolidated_weather[0];
+        $scope.Vancouver = response.data;
+    });
+});
+app.controller("DetailController", function ($scope, $http, $location, $routeParams) {
+    $http.get('Api/weather.php?command=location&woeid=' + $routeParams.woeid).then(function(response) {
+        $scope.CityInfo = response.data;
+        $scope.weather = response.data.consolidated_weather;
+    });
+});
+app.controller("ResultController", function ($scope, $location) {
+    $scope.Search = function(){
+        $location.path('/search/' + $scope.keyword);
+    }
+});
+app.controller("CurrentDateController", function ($scope) {
+    $scope.TodayIs = 'asdasd';
+});
+app.controller("SearchController", function ($scope, $http, $routeParams) {
+    $http.get('Api/weather.php?command=search&keyword=' + $routeParams.keyword).then(function(response) {
+        if(response.data.length > 0){
+            var l_woeid = response.data[0].woeid;
+            $http.get('Api/weather.php?command=location&woeid=' + l_woeid).then(function(response) {
+                $scope.CityInfo = response.data;
+                $scope.weather = response.data.consolidated_weather;
+            });
+        }
+        else{
+            $scope.ErrorMsg = "No results were found. Try changing the keyword!";
+        }
+    });
+});
+var d = new Date();
+var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+document.getElementById("TodayIs").innerHTML = 'Today is '+days[d.getDay()];
+</script>
+
+</body>
+</html>
+

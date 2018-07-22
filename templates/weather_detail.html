@@ -1,0 +1,34 @@
+<h1>{{CityInfo.title}} {{CityInfo.parent.title}}</h1>
+<p><h2>Timezone: {{CityInfo.timezone}}</h2></p>
+<p><h2>Lat - Long: {{CityInfo.latt_long}}</h2></p>
+
+
+<table cellspacing="20">
+	<tr>
+		<th>Weather State</th>
+		<th>Minimum Temprature</th>
+		<th>Maximum Temprature</th>
+		<th>Temprature</th>
+		<th>Humidity</th>
+		<th>Wind Speed</th>
+		<th>Icon</th>
+	</tr>
+	<tr ng-repeat="x in weather">
+		<td>{{x.weather_state_name}}</td>
+		<td>{{x.min_temp}}</td>
+		<td>{{x.max_temp}}</td>
+		<td>{{x.the_temp}}</td>
+		<td>{{x.humidity}}</td>
+		<td>{{x.wind_speed}}</td>
+		<td><img src="https://www.metaweather.com/static/img/weather/{{x.weather_state_abbr}}.svg"></td>
+	</tr>
+</table>
+
+<style type="text/css">
+td.ng-binding {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+</style>

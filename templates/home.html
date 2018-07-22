@@ -1,0 +1,61 @@
+<div class="container">
+	<table cellspacing="20">
+		<tr>
+			<th>City Name</th>
+			<th>Temperature</th>
+			<th>Maximum temperature</th>
+			<th>Minimum temperature</th>
+			<th>Icon</th>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{Istanbul.woeid}}">{{Istanbul.title}}</a></td>
+			<td>{{IstanbulTemp.the_temp}}</td>
+			<td>{{IstanbulTemp.max_temp}}</td>
+			<td>{{IstanbulTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{IstanbulTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{Berlin.woeid}}">{{Berlin.title}}</a></td>
+			<td>{{BerlinTemp.the_temp}}</td>
+			<td>{{BerlinTemp.max_temp}}</td>
+			<td>{{BerlinTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{BerlinTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{London.woeid}}">{{London.title}}</a></td>
+			<td>{{LondonTemp.the_temp}}</td>
+			<td>{{LondonTemp.max_temp}}</td>
+			<td>{{LondonTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{LondonTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{Helsinki.woeid}}">{{Helsinki.title}}</a></td>
+			<td>{{HelsinkiTemp.the_temp}}</td>
+			<td>{{HelsinkiTemp.max_temp}}</td>
+			<td>{{HelsinkiTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{HelsinkiTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{Dublin.woeid}}">{{Dublin.title}}</a></td>
+			<td>{{DublinTemp.the_temp}}</td>
+			<td>{{DublinTemp.max_temp}}</td>
+			<td>{{DublinTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{DublinTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+		<tr>
+			<td><a href="#!weather/{{Vancouver.woeid}}">{{Vancouver.title}}</a></td>
+			<td>{{VancouverTemp.the_temp}}</td>
+			<td>{{VancouverTemp.max_temp}}</td>
+			<td>{{VancouverTemp.min_temp}}</td>
+			<td><img src="https://www.metaweather.com/static/img/weather/{{VancouverTemp.weather_state_abbr}}.svg"></td>
+		</tr>
+	</table>
+</div>
+<style type="text/css">
+td.ng-binding {
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+</style>
